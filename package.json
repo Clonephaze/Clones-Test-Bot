@@ -18,5 +18,8 @@
   "homepage": "https://github.com/Clonephaze/WolframBot#readme",
   "devDependencies": {
     "eslint": "^8.43.0"
+  },
+  "dependencies": {
+    "undici": "^5.22.1"
   }
 }
