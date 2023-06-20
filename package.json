@@ -1,0 +1,19 @@
+{
+  "name": "wolframbot",
+  "version": "0.0.1",
+  "description": "A bot meant to help and tie into wolfram",
+  "main": "Index.js",
+  "scripts": {
+    "test": "wolfcall"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Clonephaze/WolframBot.git"
+  },
+  "author": "Clonephaze",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Clonephaze/WolframBot/issues"
+  },
+  "homepage": "https://github.com/Clonephaze/WolframBot#readme"
+}
