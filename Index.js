@@ -5,7 +5,7 @@ const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
 // Create a new Discord client with the Guilds intent
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages] });
 
 // Create a collection to store commands
 client.commands = new Collection();
@@ -55,6 +55,18 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
+
+const keywordsBCMLbug = ['loading forever', 'keeps loading', 'wont load', 'won\'t load', 'stuck on loading', 'stuck on load', 'load forever', 'loading screen', 'black screen', 'infinite loading'];
+client.on('messageCreate', message => {
+	if (!message.author.bot && keywordsBCMLbug.some(word => message.content.toLowerCase().includes(word))) {
+		message.reply(`Sounds like you have the bcml bug! We have a script that will help fix that linked below. Get that then follow these steps:
+		• Run the script, and allow it to uninstall bcml for you.
+		• Once the script is complete it will re-open bcml for you
+		• Click remerge or press Ctrl+M and launch your game when complete.
+		If the problem persists, try these steps again! The bug can stick around a handful of times and may need multiple attempts to solve.`);
+	}
+});
 
 // Log in to Discord with the bot token
 client.login(token);
