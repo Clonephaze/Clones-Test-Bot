@@ -1,7 +1,7 @@
 // Import required modules and packages
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, EmbedBuilder } = require('discord.js');
 const { token } = require('./config.json');
 
 // Create a new Discord client with the Guilds intent
@@ -56,15 +56,21 @@ for (const file of eventFiles) {
 	}
 }
 
-
+// start listening for keywords and reply if conditions are met
 const keywordsBCMLbug = ['loading forever', 'keeps loading', 'wont load', 'won\'t load', 'stuck on loading', 'stuck on load', 'load forever', 'loading screen', 'black screen', 'infinite loading'];
 client.on('messageCreate', message => {
 	if (!message.author.bot && keywordsBCMLbug.some(word => message.content.toLowerCase().includes(word))) {
+		const bcmlEmbed = new EmbedBuilder()
+			.setColor(0x0099FF)
+			.setTitle('BCML Bug Fix Script')
+			.setURL('https://cdn.discordapp.com/attachments/978056569994502184/1118745645898022912/BCML_Bug_Fix.py')
+			.setDescription('Download this then follow the steps provided!');
 		message.reply(`Sounds like you have the bcml bug! We have a script that will help fix that linked below. Get that then follow these steps:
 		• Run the script, and allow it to uninstall bcml for you.
 		• Once the script is complete it will re-open bcml for you
 		• Click remerge or press Ctrl+M and launch your game when complete.
 		If the problem persists, try these steps again! The bug can stick around a handful of times and may need multiple attempts to solve.`);
+		message.reply(({ embeds: [bcmlEmbed] }));
 	}
 });
 
