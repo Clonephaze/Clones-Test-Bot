@@ -35,7 +35,7 @@ module.exports = {
 
 				const wolframEmbed = new EmbedBuilder()
 					.setColor(0xEFFF00)
-					.setTitle(term.uppercase)
+					.setTitle(term.toUpperCase())
 					.addFields(
 						{ name: 'Results', value: trim(plaintext, 1024) },
 					);
