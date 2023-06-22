@@ -3,7 +3,7 @@
  <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
 </p>
 
-<h3 align="center">wolframbot</h3>
+<h3 align="center">Clone's Test Bot</h3>
 
 <div align="center">
 
@@ -16,7 +16,7 @@
 
 ---
 
-<p align="center"> Few lines describing your project.
+<p align="center"> This README will be updated in the future. For now, pay attention to any commands or files that call from libraries you may not have. Also ensure you have proper tokens stored in a seperate file not stored on github and a proper .env setup. 
     <br> 
 </p>
 
