@@ -1,21 +1,18 @@
 {
-  "name": "wolframbot",
-  "version": "0.0.1",
-  "description": "A bot meant to help and tie into wolfram",
+  "name": "Clone's Test Bot",
+  "version": "0.1.8",
+  "description": "A Bot mostly meant for testing and learning",
   "main": "Index.js",
-  "scripts": {
-    "test": "wolfcall"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Clonephaze/WolframBot.git"
   },
   "author": "Clonephaze",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Clonephaze/WolframBot/issues"
+    "url": "https://github.com/Clonephaze/Clones-Test-Bot/issues"
   },
-  "homepage": "https://github.com/Clonephaze/WolframBot#readme",
+  "homepage": "https://github.com/Clonephaze/Clones-Test-Bot#readme",
   "devDependencies": {
     "eslint": "^8.43.0"
   },
@@ -23,9 +20,6 @@
     "discord.js": "^14.11.0",
     "discordjs-chatgpt": "^0.2.1",
     "dotenv": "^16.3.1",
-    "node-fetch": "^3.3.1",
-    "openai": "^3.3.0",
-    "openai-api": "^1.3.1",
     "undici": "^5.22.1"
   }
 }
