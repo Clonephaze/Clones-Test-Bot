@@ -56,7 +56,7 @@ for (const file of eventFiles) {
 	}
 }
 
-// start listening for keywords and reply if conditions are met
+// Start listening for keywords and reply if BCML Bug is detected
 const keywordsBCMLbug = ['loading forever', 'keeps loading', 'wont load', 'won\'t load', 'stuck on loading', 'stuck on load', 'load forever', 'loading screen', 'black screen', 'infinite loading'];
 client.on('messageCreate', message => {
 	if (!message.author.bot && keywordsBCMLbug.some(word => message.content.toLowerCase().includes(word))) {
@@ -65,12 +65,26 @@ client.on('messageCreate', message => {
 			.setTitle('BCML Bug Fix Script')
 			.setURL('https://cdn.discordapp.com/attachments/978056569994502184/1118745645898022912/BCML_Bug_Fix.py')
 			.setDescription('Download this then follow the steps provided!');
-		message.reply(`Sounds like you have the bcml bug! We have a script that will help fix that linked below. Get that then follow these steps:
-		• Run the script, and allow it to uninstall bcml for you.
-		• Once the script is complete it will re-open bcml for you
-		• Click remerge or press Ctrl+M and launch your game when complete.
-		If the problem persists, try these steps again! The bug can stick around a handful of times and may need multiple attempts to solve.`);
-		message.reply(({ embeds: [bcmlEmbed] }));
+		message.reply({
+			content: 'Sounds like you have the bcml bug! We have a script that will help fix that linked below. Get that then follow these steps:\n\n• Run the script, and allow it to uninstall bcml for you.\n• Once the script is complete it will re-open bcml for you\n• Click remerge or press Ctrl+M and launch your game when complete.\n\nIf the problem persists, try these steps again! The bug can stick around a handful of times and may need multiple attempts to solve.',
+			embeds: [bcmlEmbed],
+		});
+	}
+});
+
+// Start listening for keywords and reply if the inventory bug is detected
+const keywordsInvBug = ['everything in my inventory', 'set to zero', 'set to 0', 'lost inventory', 'all my items'];
+client.on('messageCreate', message => {
+	if (!message.author.bot && keywordsInvBug.some(word => message.content.toLowerCase().includes(word))) {
+		const dataLayerEmbed = new EmbedBuilder()
+			.setColor(0x0099FF)
+			.setTitle('Data Layer Mod')
+			.setURL('https://gamebanana.com/mods/49886')
+			.setDescription('Paste this into your DataPack folder.');
+		message.reply({
+			content: 'It sounds like you\'re experiencing the inventory bug! If you are on Weekly Release 8 or newer, please ensure you have installed the Data Layer Mod. If you are on an older release, please check out this message and see if it solves the issue for you: https://discord.com/channels/930516653656129617/930518282740592650/1101019391753207840',
+			embeds: [dataLayerEmbed],
+		});
 	}
 });
 
