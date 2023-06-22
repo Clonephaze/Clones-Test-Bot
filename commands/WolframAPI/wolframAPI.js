@@ -21,7 +21,7 @@ module.exports = {
 			const query = new URLSearchParams({ input:term });
 
 			try {
-				const wolfResult = await request(`http://api.wolframalpha.com/v2/query?appid=${WolfAPI}&${query.toString()}&output=json`);
+				const wolfResult = await request(`http://api.wolframalpha.com/v2/query?appid=${WolfAPI}&${query.toString()}&format=image,plaintext&output=json`);
 				const { queryresult } = await wolfResult.body.json();
 
 				// Find the first pod with a subpod that has a plaintext field
@@ -32,10 +32,13 @@ module.exports = {
 				}
 
 				const plaintext = podWithPlaintext.subpods[0].plaintext;
+				const image = queryresult?.pods?.[2]?.subpods?.[0]?.img?.src;
 
 				const wolframEmbed = new EmbedBuilder()
-					.setColor(0xEFFF00)
+					.setColor(0xff7e00)
 					.setTitle(term.toUpperCase())
+					.setURL(`https://www.wolframalpha.com/input?i=${encodeURIComponent(term)}`)
+					.setImage(image)
 					.addFields(
 						{ name: 'Results', value: trim(plaintext, 1024) },
 					);
