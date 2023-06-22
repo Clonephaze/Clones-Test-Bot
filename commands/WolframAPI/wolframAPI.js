@@ -16,6 +16,7 @@ module.exports = {
 	async execute(interaction) {
 		await interaction.deferReply();
 
+
 		if (interaction.commandName === 'wolfram') {
 			const term = interaction.options.getString('term');
 			const query = new URLSearchParams({ input:term });
@@ -34,9 +35,11 @@ module.exports = {
 				const plaintext = podWithPlaintext.subpods[0].plaintext;
 				const image = queryresult?.pods?.[2]?.subpods?.[0]?.img?.src;
 
+				const title = term.length > 48 ? term.slice(0, 48) + '...' : term;
+
 				const wolframEmbed = new EmbedBuilder()
 					.setColor(0xff7e00)
-					.setTitle(term.toUpperCase())
+					.setTitle(title.toUpperCase())
 					.setURL(`https://www.wolframalpha.com/input?i=${encodeURIComponent(term)}`)
 					.setImage(image)
 					.addFields(
