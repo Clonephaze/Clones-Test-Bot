@@ -22,7 +22,6 @@ module.exports = {
 
 			try {
 				const wolfResult = await request(`http://api.wolframalpha.com/v2/query?appid=${WolfAPI}&${query.toString()}&output=json`);
-				console.log(wolfResult);
 				const { queryresult } = await wolfResult.body.json();
 
 				// Find the first pod with a subpod that has a plaintext field
@@ -36,7 +35,7 @@ module.exports = {
 
 				const wolframEmbed = new EmbedBuilder()
 					.setColor(0xEFFF00)
-					.setTitle(term)
+					.setTitle(term.uppercase)
 					.addFields(
 						{ name: 'Results', value: trim(plaintext, 1024) },
 					);
