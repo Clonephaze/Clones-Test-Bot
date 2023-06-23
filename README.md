@@ -44,7 +44,7 @@ To make it extremely easy for the end user I have created an install script that
 
 This guide is going to start at a point assuming you've already made and gotten your Discord bot token . If you have not already done so please come back to this guide when you have. Additionally, if you want to use the Wolfram Alpha or Chat GPT commands then you will need their respective API keys.
 
-Before you can use the script you'll need to select and install the appropriate versions of Node.js [HERE](https://nodejs.org/) and Python [HERE](https://www.python.org/downloads) and Git [HERE](https://gitforwindows.org/)
+Before you can use the script you'll need to select and install the appropriate versions of Node.js [HERE](https://nodejs.org/), Python [HERE](https://www.python.org/downloads), and Git [HERE](https://gitforwindows.org/)
 
 After you're done with that you'll need to create a folder where you'd like your bot to live, somewhere like: C:\Users\YOUR_USERNAME_HERE\Documents\GitHub.
 
