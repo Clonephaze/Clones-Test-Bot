@@ -1,8 +1,10 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/M5fBsF7.jpg" alt="Project logo"></a>
+    <div style="display: inline-block; overflow: hidden; border-radius: 50%; text-align: center;">
+      <img width="200px" height="200px" src="https://i.imgur.com/M5fBsF7.jpg" alt="Project logo">
+    </div>
+  </a>
 </p>
-
 <h3 align="center">Clone's Test Bot</h3>
 
 <div align="center">
