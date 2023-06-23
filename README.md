@@ -40,61 +40,29 @@
 These instructions will help you get your bot up and running using your own personal tokens for the Discord bot, Wolfram Alpha API, and ChatGPT API. Just follow these steps, and you'll have your bot set up and ready to go in no time! 
 ## ✔ Prerequisites <a name = "prerequisites"></a>
 
-This guide is going to start at a point assuming you've already made and gotten your Discord bot token, and you installed a code editor such as Visual Studio Code or something else that will let you edit .js files. If you have not already done so please come back to this guide when you have. Additionally, if you want to use the Wolfram Alpha or Chat GPT commands then you will need their respective API keys.
+To make it extremely easy for the end user I have created an install script that will do most of the tedious work for you! If you would rather use the manual install instructions, you can find them [HERE](./manualInstallInstructions.md). Otherwise read on!
 
-Once you've got all that out of the way there's a library you'll need to install and a file structure to setup so lets go over all that first. 
+This guide is going to start at a point assuming you've already made and gotten your Discord bot token . If you have not already done so please come back to this guide when you have. Additionally, if you want to use the Wolfram Alpha or Chat GPT commands then you will need their respective API keys.
 
-Starting with Node.js: Select and install the appropriate version of Node.js [HERE](https://nodejs.org/).
+Before you can use the script you'll need to select and install the appropriate version of Node.js [HERE](https://nodejs.org/).
 
 After you're done with that you'll need to create a folder where you'd like your bot to live, somewhere like: C:\Users\YOUR_USERNAME_HERE\Documents\GitHub.
 
 ## 💻 Installing <a name = "installing"></a>
 
-Now that you have Node.js and you've created a folder where you'd like your bot to reside we can move on to seting up the bot itself! If you know how to clone a repo you can do that, if not go ahead and download the entire git directory [HERE](https://github.com/Clonephaze/Clones-Test-Bot/archive/refs/heads/main.zip) and place the folder titled "Clones-Test-Bot-main" inside your previously made folder. 
+Now that you have Node.js and you've created a folder where you'd like your bot to reside we can move on to seting up the bot itself! Go ahead and download the install script [HERE](https://github.com/Clonephaze/Clones-Test-Bot/releases/latest) and place it inside your previously made folder. When ready, execute the script. 
 
-After that, open the "Clones-Test-Bot-main" folder and open a command prompt window in that folder. The easiest way is to type "cmd" in the address bar. We're going to be installing the required libraries to make the bot and all commands work. 
+The script will proceed to clone the git repository and install the required libraries to make the bot and all commands work. After it has installed the libraries it will prompt you prompt you for the following information:
 
-Once there type the following command to install Discord.js
-```
-npm install discord.js
-```
-Then type the following command to install the dotEnv library
-```
-npm i dotenv
-```
-Then type the following command to install the undici library
-```
-npm i undici
-```
-Now if you're going to want to use the chatGPT command you'll also need this library
-```
-npm i discordjs-chatgpt
-```
-Only a few more steps to go! Now we need to make a couple files. First, open up the "Clones-Test-Bot-main" directory in your choice of code editor.
+- Your Discord bot token found [HERE](https://discord.com/developers/applications) *aplication->Bot->Bot Token*
+- Your Application ID found [HERE](https://discord.com/developers/applications) *aplication->General Information->Application ID*
+- Your Server ID found [HERE](https://support.discord.com/hc/en-us/articles/206346498) *Open discord application->Right click your server->Copy server ID*
+- Your Wolfram Alpha API key *optional* 
+- Your ChatGPT API key *optional*
 
-Creat a new file and name it "config.json"
+After that last prompt it will close and you're left with a completely prepared environment for your bot!
 
-Open the file and copy the following text into it:
-```
-{
-  "token": "{YOUR_BOT_TOKEN_HERE}",
-  "clientId": "{YOUR_APPLICATION_ID_HERE}",
-  "guildId": "{YOUR_SERVER_ID_HERE}",
-  "WolfAPI": "{YOUR-WOLFRAM-API-KEY}"
-}
-```
-Edit each field with the appropriate key/token being sure to REMOVE THE BRACKETS "{}" and then save your file. If you need help figuring out your discord keys please refer to this [insruction&nbsp;page.](https://discordjs.guide/creating-your-bot/command-deployment.html#guild-commands)
-
-Now lets invite your bot onto whatever server you're wanting your bot to run on. Under your [Developer&nbsp;Portal](https://discord.com/developers/applications) open your application and on the left side chose OAuth2->URL Generator. In the "scopes" box choose "bot". In the permissions box that pops up choose the permissions you want. I chose admin to keep it simple personally. Copy the generated URL at the bottom of the page and enter it into a browser you're signed in through to invite to the appropriate server. Follow the instructions on that screen.
-
-If you would like to use the ChatGPT command you will need just one more file, if not feel free to move on to the last step! If so, go ahead and create one more file in the base directory for the bot and name it ".env" with no letters or numbers proceeding the file name. In this file enter the following line.
-
-```
-YOUR_OPENAI_API_KEY={Paste your openAI API key here}
-```
-Again be sure to replace the field with your api key and take care that the brackets "{}" are removed, then save your file.
-
-LAST STEP! Open up a command prompt window in the base bot directory again, and this time type the following command.
+**LAST STEP!** Open up a command prompt window in the directory with your bot and run the following command. The easiest way to open a command prompt window in the correct directory is to type "cmd" into the address bar and hit enter.
 ```
 node index.js
 ```
