@@ -1,14 +1,10 @@
+ <p align="center">
+     <a href="" rel="noopener">
+       <img class="round-image" width=200px height=200px src="https://i.imgur.com/M5fBsF7.jpg" alt="Project logo">
+     </a>
+   </p>
 
-<p align="center">
-  <a href="" rel="noopener">
- <img class="round-image" width=200px height=200px src="https://i.imgur.com/M5fBsF7.jpg" alt="Project logo">
-</p>
-
-<style>
-  img.round-image {
-    border-radius: 50%;
-  }
-</style>
+   <link rel="stylesheet" type="text/css" href="style.css">
 
 <h3 align="center">Clone's Test Bot</h3>
 
