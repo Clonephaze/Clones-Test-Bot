@@ -1,6 +1,6 @@
 {
-  "token": "{YOUR_BOT_TOKEN_HERE}",
-  "clientId": "{YOUR_APPLICATION_ID_HERE}",
-  "guildId": "{YOUR_SERVER_ID_HERE}",
-  "WolfAPI": "{YOUR-WOLFRAM-API-KEY}"
+  "token": "your_bot_token",
+  "clientId": "your_application_id",
+  "guildId": "your_server_id",
+  "WolfAPI": "your_wolfram_api_key"
 }
