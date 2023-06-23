@@ -1,9 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
-    <div style="display: inline-block; overflow: hidden; border-radius: 50%; text-align: center;">
-      <img width="200px" height="200px" src="https://i.imgur.com/M5fBsF7.jpg" alt="Project logo">
-    </div>
-  </a>
+ <img width=200px height=200px src="https://i.imgur.com/q6xoMVH.png" alt="Project logo"></a>
 </p>
 <h3 align="center">Clone's Test Bot</h3>
 
@@ -122,6 +119,3 @@ Now that you've logged in the bot in the console, open the Discord server the bo
 
 - Hat tip to anyone whose code was used
 - [@kylelobo](https://github.com/kylelobo) -ReadMe Generator. Very useful as a template builder.
-- Inspiration
-- References
-**
