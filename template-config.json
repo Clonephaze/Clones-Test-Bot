@@ -4,4 +4,3 @@
   "guildId": "{YOUR_SERVER_ID_HERE}",
   "WolfAPI": "{YOUR-WOLFRAM-API-KEY}"
 }
-//Be sure to delete this comment. You need to replace the {YOUR_X_X_HERE} with the proper keys/tokens but do NOT remove the qoutation marks. Rename the file to "config.json"
