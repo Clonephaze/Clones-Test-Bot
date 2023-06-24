@@ -1,21 +1,43 @@
 @echo off
 
-REM Change PowerShell execution policy
 powershell -command "& {Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force}"
 
-curl -o node.msi https://nodejs.org/dist/v20.3.1/node-v20.3.1-x64.msi
+node -v > nul 2>&1
+if %errorlevel% equ 0 (
+    echo Node.js is already installed.
+) else (
+    curl -o node.msi https://nodejs.org/dist/v20.3.1/node-v20.3.1-x64.msi
 
-REM Install Node.js using msiexec.exe
-msiexec.exe /i node.msi /quiet
+    powershell -Command "Start-Process -FilePath 'msiexec.exe' -ArgumentList '/i node.msi /quiet' -Verb RunAs"
+)
 
-curl -s -o git.exe https://github.com/git-for-windows/git/releases/download/v2.41.0.windows.1/Git-2.41.0-64-bit.exe
-start /wait git.exe /SILENT
 
-git clone https://github.com/Clonephaze/Clones-Test-Bot
+choco list --local-only chocolateygui > nul 2>&1
+if %errorlevel% equ 0 (
+    echo Chocolatey is already installed.
+) else (
+    @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+)
 
-cd Clones-Test-Bot
+where git > nul 2>&1
+if %errorlevel% equ 0 (
+    echo Git is already installed.
+) else (
+    choco install git -y
+)
+
+for /f "tokens=3*" %%A in ('reg query "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment" /v Path') do set syspath=%%A%%B
+
+for /f "tokens=3*" %%A in ('reg query "HKCU\Environment" /v Path') do set userpath=%%A%%B
+
+set PATH=%userpath%;%syspath%
+
+git clone https://github.com/Clonephaze/Clones-Test-Bot %userprofile%/Documents/Github/Clones-Test-Bot
+
+cd %userprofile%/Documents/Github/Clones-Test-Bot
 
 npm install
+
 
 echo { "token": "", "clientId": "", "guildId": "", "WolfAPI": "" } > template-config.json
 
@@ -34,3 +56,4 @@ powershell -Command "(Get-Content template.env) -replace 'USER_ENTRY_HERE', '%us
 
 del template-config.json
 del template.env
+
