@@ -1,5 +1,7 @@
 @echo off
 
+echo %~dp0 > %userprofile%\Documents\CTBSCL.txt
+
 powershell -command "& {Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force}"
 
 node -v > nul 2>&1
@@ -32,28 +34,11 @@ for /f "tokens=3*" %%A in ('reg query "HKCU\Environment" /v Path') do set userpa
 
 set PATH=%userpath%;%syspath%
 
-git clone https://github.com/Clonephaze/Clones-Test-Bot %userprofile%/Documents/Github/Clones-Test-Bot
+set /p original_location=<%userprofile%\Documents\CTBSCL.txt
+cd /d %original_location%
 
-cd %userprofile%/Documents/Github/Clones-Test-Bot
+git clone https://github.com/Clonephaze/Clones-Test-Bot %original_location%
 
-npm install
+cd %original_location%/Clones-Test-Bot/Install Script
 
-
-echo { "token": "", "clientId": "", "guildId": "", "WolfAPI": "" } > template-config.json
-
-set /p token="Enter your Discord bot token: "
-set /p clientId="Enter your application's client ID: "
-set /p guildId="Enter your server ID: "
-set /p WolfAPI="Enter your Wolfram API key or just press enter to skip: "
-
-powershell -Command "(Get-Content template-config.json -Raw | ConvertFrom-Json) | ForEach-Object { $_.token = '%token%'; $_.clientId = '%clientId%'; $_.guildId = '%guildId%'; $_.WolfAPI = '%WolfAPI%'; $_ } | ConvertTo-Json -Depth 100 | Set-Content config.json"
-
-echo USER_ENTRY_HERE > template.env
-
-set /p userEntry="Enter your OpenAI API key or just press enter to skip: "
-
-powershell -Command "(Get-Content template.env) -replace 'USER_ENTRY_HERE', '%userEntry%' | Set-Content .env"
-
-del template-config.json
-del template.env
-
+python "DependenciesFileCreation.py"

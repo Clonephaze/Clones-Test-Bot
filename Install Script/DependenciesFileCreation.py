@@ -5,15 +5,12 @@ import json
 def prompt_user(question):
     return input(question)
 
-# Run command to clone the repository
-clone_command = "git clone https://github.com/Clonephaze/Clones-Test-Bot"
-os.system(clone_command)
-
-# Extract the folder name
-folder_name = clone_command.split("/")[-1].split(".")[0]
-
-# Change the current working directory
-os.chdir(folder_name)
+# Function to change directory
+def change_directory():
+    script_dir = os.path.dirname(os.path.realpath(__file__))
+    parent_dir = os.path.abspath(os.path.join(script_dir, os.pardir))
+    grandparent_dir = os.path.abspath(os.path.join(parent_dir, os.pardir))
+    os.chdir(grandparent_dir)
 
 # Run command to install dependencies
 npm_install_command = "npm install"
@@ -23,6 +20,7 @@ os.system(npm_install_command)
 template_config_filename = 'template-config.json'
 config_filename = 'config.json'
 
+# Edit template-config.json
 with open(template_config_filename, 'r') as template_file:
     template_data = json.load(template_file)
 
@@ -51,3 +49,10 @@ with open(env_filename, 'w') as env_file:
 # Delete template files
 os.remove(template_config_filename)
 os.remove(template_env_filename)
+
+# Call the change_directory() function to change the current working directory
+change_directory()
+
+# Delete the install.bat file
+installScript = 'install.bat'
+os.remove(installScript)
