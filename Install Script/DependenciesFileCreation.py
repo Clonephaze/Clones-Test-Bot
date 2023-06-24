@@ -12,12 +12,24 @@ def change_directory():
     grandparent_dir = os.path.abspath(os.path.join(parent_dir, os.pardir))
     os.chdir(grandparent_dir)
 
+# Get the current working directory
+current_working_directory = os.getcwd()
+
+# Print the current working directory
+print(current_working_directory)
+
 # Run command to install dependencies
 npm_install_command = "npm install"
 os.system(npm_install_command)
 
 # Call the change_directory() function to change the current working directory
 change_directory()
+
+# Get the current working directory
+current_working_directory = os.getcwd()
+
+# Print the current working directory
+print(current_working_directory)
 
 # Edit and rename template-config.json
 template_config_filename = 'template-config.json'
