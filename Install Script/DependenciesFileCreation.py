@@ -5,28 +5,11 @@ import json
 def prompt_user(question):
     return input(question)
 
-# Function to change directory
-def change_directory():
-    script_dir = os.path.dirname(os.path.realpath(__file__))
-    parent_dir = os.path.abspath(os.path.join(script_dir, os.pardir))
-    grandparent_dir = os.path.abspath(os.path.join(parent_dir, os.pardir))
-    os.chdir(grandparent_dir)
-
-# Get the current working directory
-current_working_directory = os.getcwd()
-
-# Print the current working directory
-print(current_working_directory)
+os.chdir("..")
 
 # Run command to install dependencies
 npm_install_command = "npm install"
 os.system(npm_install_command)
-
-# Get the current working directory
-current_working_directory = os.getcwd()
-
-# Print the current working directory
-print(current_working_directory)
 
 # Edit and rename template-config.json
 template_config_filename = 'template-config.json'
@@ -62,15 +45,11 @@ with open(env_filename, 'w') as env_file:
 os.remove(template_config_filename)
 os.remove(template_env_filename)
 
-# Call the change_directory() function to change the current working directory
-change_directory()
-
 # Delete the install.bat file
-installScript = 'install.bat'
-os.remove(installScript)
+##os.remove(installScript)
 
 # Define the file path
-file_path = os.path.expanduser("~/Documents/CTBSCL.txt")
+##file_path = os.path.expanduser("~/Documents/CTBSCL.txt")
 
 # Call the delete_file() function to delete the file
-os.remove(file_path)
+##os.remove(file_path)
