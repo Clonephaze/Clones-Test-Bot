@@ -13,6 +13,18 @@ if %errorlevel% equ 0 (
     powershell -Command "Start-Process -FilePath 'msiexec.exe' -ArgumentList '/i node.msi /quiet' -Verb RunAs"
 )
 
+set /p original_location=<%userprofile%\Documents\CTBSCL.txt
+
+reg query "HKLM\SOFTWARE\Python\PythonCore\3.8" > nul 2>&1
+if %errorlevel% equ 0 (
+    echo Python is already installed.
+) else (
+    cd /d %original_location%
+    REM The following three lines of code are from @torphedo https://github.com/torphedo/BOTW-Mods/blob/main/code/scripts/Installer.bat#L31-L33
+    curl -s -o python-3.8.10-amd64.exe https://www.python.org/ftp/python/3.8.10/python-3.8.10-amd64.exe
+    python-3.8.10-amd64.exe /quiet InstallAllUsers=1 DefaultAllUsersTargetDir=C:\Python38 PrependPath=1
+    del python-3.8.10-amd64.exe
+)
 
 choco list --local-only chocolateygui > nul 2>&1
 if %errorlevel% equ 0 (
@@ -37,8 +49,8 @@ set PATH=%userpath%;%syspath%
 set /p original_location=<%userprofile%\Documents\CTBSCL.txt
 cd /d %original_location%
 
-git clone https://github.com/Clonephaze/Clones-Test-Bot %original_location%
+git clone https://github.com/Clonephaze/Clones-Test-Bot
 
-cd %original_location%/Clones-Test-Bot/Install Script
+cd Clones-Test-Bot/Install Script
 
 python "DependenciesFileCreation.py"
