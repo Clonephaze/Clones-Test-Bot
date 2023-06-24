@@ -56,3 +56,9 @@ change_directory()
 # Delete the install.bat file
 installScript = 'install.bat'
 os.remove(installScript)
+
+# Define the file path
+file_path = os.path.expanduser("~/Documents/CTBSCL.txt")
+
+# Call the delete_file() function to delete the file
+os.remove(file_path)
