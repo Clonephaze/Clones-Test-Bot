@@ -47,7 +47,7 @@ To make it extremely easy for the end user I have created an install script that
 
 You will need to have already made a bot-account/application through discord. You can do so [HERE](https://discord.com/developers/applications). Afterwards youll need to invite your bot to whatever server you want it working in. Under your [Developer&nbsp;Portal](https://discord.com/developers/applications) open your application and on the left side chose OAuth2->URL Generator. In the "scopes" box choose "bot". In the permissions box that pops up choose the permissions you want. Copy the url at the bottom of the page and paste it into your address bar. 
 
-This bot has 2 optional commands "/gtp" and "/wolfram" that will allow you to interact with the Wolfram Alpha API and ChatGPT API respectively, but you will need your own API keys to use them. Because of this you can skip these keys entirely if you wish when prompted by my script. 
+This bot has 2 optional commands "/gpt" and "/wolfram" that will allow you to interact with the Wolfram Alpha API and ChatGPT API respectively, but you will need your own API keys to use them. Because of this you can skip these keys entirely if you wish when prompted by my script. 
 
 ## 💻 Installing <a name = "installing"></a>
 
