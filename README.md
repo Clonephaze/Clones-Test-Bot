@@ -19,8 +19,6 @@
     <br> 
 </p>
 
-![Alt Text](https://i.imgur.com/vxPkm4Z.gif)
-
 
 ## 📝 Table of Contents
 
@@ -40,22 +38,22 @@
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will help you get your bot up and running using your own personal tokens for the Discord bot, Wolfram Alpha API, and ChatGPT API. Just follow these steps, and you'll have your bot set up and ready to go in no time! 
+This guide will walk you through the process of using my setup script to get your your own instance of the bot up and running as easily and smoothly as possible! If you would rather use the manual install instructions, you can find them [HERE](./manualInstallInstructions.md). Otherwise read on!
 ## ✔ Prerequisites <a name = "prerequisites"></a>
 
-To make it extremely easy for the end user I have created an install script that will do most of the tedious work for you! If you would rather use the manual install instructions, you can find them [HERE](./manualInstallInstructions.md). Otherwise read on!
+To make it extremely easy for the end user I have created an install script that will do all of the tedious work for you! Put simply my script will install *all* of the necessary missing dependencies, get all your files ready, and leave you with a completely prepared environment for your bot!  
 
-This guide is going to start at a point assuming you've already made and gotten your Discord bot token . If you have not already done so please come back to this guide when you have. Additionally, if you want to use the Wolfram Alpha or Chat GPT commands then you will need their respective API keys.
+You will need to have have already made a bot-account/application through discord. You can do so [HERE](https://discord.com/developers/applications). Afterwards youll need to invite your bot to whatever server you want it working in. Under your [Developer&nbsp;Portal](https://discord.com/developers/applications) open your application and on the left side chose OAuth2->URL Generator. In the "scopes" box choose "bot". In the permissions box that pops up choose the permissions you want. Copy the url at the bottom of the page and paste it into your address bar. 
 
-Before you can use the script you'll need to select and install the appropriate versions of Node.js [HERE](https://nodejs.org/), Python [HERE](https://www.python.org/downloads), and Git [HERE](https://gitforwindows.org/)
-
-After you're done with that you'll need to create a folder where you'd like your bot to live, somewhere like: C:\Users\YOUR_USERNAME_HERE\Documents\GitHub.
+This bot has 2 optional commands "/gtp" and "/wolfram" that will allow you to interact with the Wolfram Alpha API and ChatGPT API respectively, but you will need your own API keys to use them. Because of this you can skip these keys entirely if you wish when prompted by my script. 
 
 ## 💻 Installing <a name = "installing"></a>
 
-Now that you have Node.js, Python, and git and you've created a folder where you'd like your bot to reside we can move on to seting up the bot itself! Go ahead and download the install script [HERE](https://github.com/Clonephaze/Clones-Test-Bot/releases/latest) and place it inside your previously made folder. When ready, execute the script. 
+ If you've gotten your bot token and are ready to install the bot, you can download the install script [HERE](https://github.com/Clonephaze/Clones-Test-Bot/releases/latest) and place it anywhere you would like you would like the folder for your bot to live! For instance, if placed in the Documents folder the bots folder will be located at: "Documents/Clones-Test-Bot".
 
-The script will proceed to clone the git repository and install the required libraries to make the bot and all commands work. After it has installed the libraries it will prompt you prompt you for the following information:
+You absolutely ***MUST RUN THE SCRIPT AS AN ADMINISTRATOR!*** It will not run properly without it. Right click the script and select "Run as Administrator". If prompted if you would like to proceed then choose to run anyway.
+
+At this point the script will proceed to install all of the missing dependencies and download (clone) my entire git repository to the folder you placed the script in. Before we can wrap up however you will need to supply the following information for the bot to work:
 
 - Your Discord bot token found [HERE](https://discord.com/developers/applications) *aplication->Bot->Bot Token*
 - Your Application ID found [HERE](https://discord.com/developers/applications) *aplication->General Information->Application ID*
@@ -63,13 +61,8 @@ The script will proceed to clone the git repository and install the required lib
 - Your Wolfram Alpha API key *optional* 
 - Your ChatGPT API key *optional*
 
-After that last prompt it will close and you're left with a completely prepared environment for your bot!
+After that last prompt it will close and you're left with a completely prepared environment for your bot! If you look inside "clones-test-bot" you'll see a file named "bot start.bat". So long as you gave your keys correctly then running that script will start up and log in your bot!
 
-**LAST STEP!** Open up a command prompt window in the directory with your bot and run the following command. The easiest way to open a command prompt window in the correct directory is to type "cmd" into the address bar and hit enter.
-```
-node index.js
-```
-If everything was done correctly that should be it! Your bot should now be logged on through the console to whatever server you invited it to. 
 
 ## 🎈 Usage <a name="usage"></a>
 
@@ -78,8 +71,9 @@ Now that you've logged in the bot in the console, open the Discord server the bo
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [Discord.js](https://discord.js.org/)
+- [Discord.js](https://discord.js.org/) - Powerful node.js library
 - [Discordjs-ChatGPT](https://github.com/Elitezen/discordjs-chatgpt/) - ChatGPT library for Discord.js
+- [Chocolatey](https://chocolatey.org/) - Package manager, used for Setup Script
 
 ## ✍️ Authors <a name = "authors"></a>
 
@@ -90,3 +84,4 @@ Now that you've logged in the bot in the console, open the Discord server the bo
 
 - Hat tip to anyone whose code was used
 - [@kylelobo](https://github.com/kylelobo) -ReadMe Generator. Very useful as a template builder.
+- [@torphedo](https://github.com/torphedo) -Told me how I could use batch scripts to install things that python could not. Ty sir.
