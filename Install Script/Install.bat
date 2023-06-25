@@ -57,4 +57,8 @@ git clone https://github.com/Clonephaze/Clones-Test-Bot
 
 cd Clones-Test-Bot/Install Script
 
+if exist "%userprofile%\Documents\CTBSCL.txt" (
+    del "%userprofile%\Documents\CTBSCL.txt"
+)
+
 python "DependenciesFileCreation.py"
