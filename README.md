@@ -38,7 +38,9 @@
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-This guide will walk you through the process of using my setup script to get your your own instance of the bot up and running as easily and smoothly as possible! If you would rather use the manual install instructions, you can find them [HERE](./manualInstallInstructions.md). Otherwise read on!
+This guide will walk you through the process of using my setup script to get your your own instance of the bot up and running as easily and smoothly as possible! If you would rather use the manual install instructions, you can find them [HERE](./manualInstallInstructions.md). 
+
+![Alt Text](https://i.imgur.com/vxPkm4Z.gif)
 ## ✔ Prerequisites <a name = "prerequisites"></a>
 
 To make it extremely easy for the end user I have created an install script that will do all of the tedious work for you! Put simply my script will install *all* of the necessary missing dependencies, get all your files ready, and leave you with a completely prepared environment for your bot!  
