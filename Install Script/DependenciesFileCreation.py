@@ -45,11 +45,9 @@ with open(env_filename, 'w') as env_file:
 os.remove(template_config_filename)
 os.remove(template_env_filename)
 
+os.chdir("..")
+
 # Delete the install.bat file
-##os.remove(installScript)
+installScript = 'install.bat'
+os.remove(installScript)
 
-# Define the file path
-##file_path = os.path.expanduser("~/Documents/CTBSCL.txt")
-
-# Call the delete_file() function to delete the file
-##os.remove(file_path)
