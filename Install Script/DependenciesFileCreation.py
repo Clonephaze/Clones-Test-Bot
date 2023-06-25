@@ -51,3 +51,6 @@ os.chdir("..")
 installScript = 'install.bat'
 os.remove(installScript)
 
+# Delete the file %userprofile%\Documents\CTBSCL.txt
+batch_file_location = os.path.expanduser(r'%userprofile%/Documents/CTBSCL.txt')
+os.remove(batch_file_location)
