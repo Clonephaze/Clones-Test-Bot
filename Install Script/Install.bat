@@ -86,7 +86,7 @@ set /p original_location=<%userprofile%\Documents\CTBSCL.txt
 cd /d %original_location%
 
 REM Clone a GitHub repository.
-git clone https://github.com/Clonephaze/Clones-Test-Bot
+git clone -b ForWildModsServer https://github.com/Clonephaze/Clones-Test-Bot
 IF NOT !errorlevel! NEQ 0 (
     echo An error occurred while cloning the repository.
     pause
