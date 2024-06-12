@@ -5,7 +5,7 @@ title "Installing Dependencies"
 REM This script sets up a development environment by installing several dependencies and cloning the GitHub repository for the bot
 
 REM This creates a file in your documents folder that stores the directory location that you would like to clone the git into
-REM This was neccessary as I need to refresh the PATH later on which erases any normal attempt to tell the script where to clone.
+REM This was necessary as I need to refresh the PATH later on which erases any normal attempt to tell the script where to clone.
 echo %~dp0 > %userprofile%\Documents\CTBSCL.txt
 
 REM Check if Node.js is installed, and if not, download and install it.
@@ -46,7 +46,8 @@ if %errorlevel% equ 0 (
 )
 
 REM Checks if Chocolatey is installed, and if not, downloads and installs it.
-choco list --local-only chocolateygui > nul 2>&1
+REM Using a more reliable method to check for Chocolatey installation.
+where choco > nul 2>&1
 if %errorlevel% equ 0 (
     echo Chocolatey is already installed.
 ) else (

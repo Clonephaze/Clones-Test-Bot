@@ -28,19 +28,6 @@ def prompt_user(message):
         else:
             return user_input
         
-def prompt_user_optional(message):
-    while True:
-        user_input = input(message)
-        user_input = user_input.strip()  # Remove leading/trailing whitespace
-
-        # Validate input
-        if ' ' in user_input:
-            print("Invalid input. Input cannot contain spaces.")
-        elif '"' in user_input or "'" in user_input:
-            print("Invalid input. Input cannot contain quote symbols.")
-        else:
-            return user_input
-
 # Set the console window title
 ctypes.windll.kernel32.SetConsoleTitleW("Creating Config.json, awaiting user input...")
 
@@ -56,7 +43,6 @@ try:
     template_data['token'] = prompt_user('Enter your Discord bot token: ')
     template_data['clientId'] = prompt_user('Enter your application\'s client ID: ')
     template_data['guildId'] = prompt_user('Enter your server ID: ')
-    template_data['WolfAPI'] = prompt_user_optional('Enter your Wolfram API key or just press enter to skip: ')
 
     with open(config_filename, 'w') as config_file:
         json.dump(template_data, config_file, indent=2)
@@ -80,13 +66,9 @@ ctypes.windll.kernel32.SetConsoleTitleW("Creating .env, awaiting user input...")
 template_env_filename = 'template.env'
 env_filename = '.env'
 
-user_entry = prompt_user_optional('Enter your OpenAI API key or just press enter to skip: ')
-
 try:
     with open(template_env_filename, 'r') as template_env_file:
         template_env_data = template_env_file.read()
-
-    template_env_data = template_env_data.replace('"USER ENTRY HERE"', user_entry)
 
     with open(env_filename, 'w') as env_file:
         env_file.write(template_env_data)
@@ -113,9 +95,9 @@ installScript = 'Complete.Bot.Setup.bat'
 installScriptSecondary = 'install.bat'
 try:
     if os.path.exists(installScript):
-     os.remove(installScript)
+        os.remove(installScript)
     if os.path.exists(installScriptSecondary):
-     os.remove(installScriptSecondary)
+        os.remove(installScriptSecondary)
 except OSError as e:
     print(f"Error while deleting files: {e}. Terminating...")
     time.sleep(5) 

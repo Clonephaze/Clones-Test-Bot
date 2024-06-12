@@ -15,6 +15,11 @@ const commands = [];
 const foldersPath = path.join(__dirname, 'commands');
 const commandFolders = fs.readdirSync(foldersPath);
 
+process.on('SIGINT', () => {
+	console.log('Bot shutting down...');
+	process.exit();
+});
+
 // Loop through each command folder
 for (const folder of commandFolders) {
 	const commandsPath = path.join(foldersPath, folder);
