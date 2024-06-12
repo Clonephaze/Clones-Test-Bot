@@ -1,14 +1,15 @@
 // Import required modules and packages
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits, EmbedBuilder } = require('discord.js');
-const { token } = require('./config.json');
+const { Client, Collection, GatewayIntentBits, EmbedBuilder, REST, Routes } = require('discord.js');
+const { token, clientId, guildId } = require('./config.json');
 
 // Create a new Discord client with the Guilds intent
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages] });
 
 // Create a collection to store commands
 client.commands = new Collection();
+const commands = [];
 
 // Find all command folders in the commands directory
 const foldersPath = path.join(__dirname, 'commands');
@@ -30,18 +31,19 @@ for (const folder of commandFolders) {
 
 		// Check if the loaded module has the required "data" and "execute" properties
 		if ('data' in command && 'execute' in command) {
-
 			// Add the command to the collection using its name as the key
 			client.commands.set(command.data.name, command);
+			commands.push(command.data.toJSON());
+			// console.log(`[INFO] Command loaded: ${command.data.name}`); //commenting out for now
 		}
 		else {
-
 			// Log a warning if the loaded module is missing the required properties
 			console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
 		}
 	}
 }
 
+// Load event handlers
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -88,5 +90,93 @@ client.on('messageCreate', message => {
 	}
 });
 
+const keywordsSpamBlock = ['you could win', 'chance to win', 'sign up now', 'you have been randomly selected', 'we are a fast growing', 'crypto giveaway'];
+client.on('messageCreate', async message => {
+	if (!message.author.bot && keywordsSpamBlock.some(keyword => message.content.toLowerCase().includes(keyword))) {
+		// Remove the user's message
+		await message.delete();
+
+		// Fetch the user to send them a DM
+		const user = await message.client.users.fetch(message.author.id);
+
+		try {
+			// Send a DM to the user explaining why their message was deleted
+			await user.send('Please do not spam. Your message was automatically deleted.');
+		}
+		catch (error) {
+			console.error(`Failed to send DM to ${user.tag}:`, error);
+		}
+	}
+});
+
+// Number of messages
+const messageLimit = 5;
+// Timeframe in milliseconds (10000 = 10 seconds)
+const timeframe = 10000;
+const userMessages = new Collection();
+client.on('messageCreate', message => {
+	if (message.author.bot) return;
+
+	const now = Date.now();
+	const userId = message.author.id;
+
+	if (!userMessages.has(userId)) {
+		userMessages.set(userId, []);
+	}
+
+	// Add the message to the user's message array
+	userMessages.get(userId).push({ timestamp: now, message });
+
+	// Filter out messages that are outside the timeframe
+	const recentMessages = userMessages.get(userId).filter(msg => now - msg.timestamp < timeframe);
+
+	// Update the user's messages with the recent ones only
+	userMessages.set(userId, recentMessages);
+
+	// Check if the user has exceeded the message limit within the timeframe
+	if (recentMessages.length >= messageLimit) {
+		// Delete the messages
+		recentMessages.forEach(msg => msg.message.delete().catch(console.error));
+
+		// This would kick the user
+		// message.guild.members.kick(userId, 'Spamming messages').catch(console.error);
+
+		// This would give the user a timeout, calculated in ms (24 hours = 24 * 60 * 60 * 1000)
+		// var timeoutTime = 24 * 60 * 60 * 1000;
+		// message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages').catch(console.error);
+
+		// This sends a warning message to the user
+		message.author.send('You would have just been kicked for spamming. Please refrain from sending too many messages in a short period.');
+
+		// Optionally, send a message to the channel or log the action
+		// message.channel.send(`User ${message.author.tag} has been warned for spamming.`);
+
+		// Clear the user's message data
+		userMessages.delete(userId);
+	}
+});
+
+
 // Log in to Discord with the bot token
 client.login(token);
+
+// Register or update commands
+client.once('ready', async () => {
+	console.log(`Logged in as ${client.user.tag}`);
+
+	const rest = new REST({ version: '10' }).setToken(token);
+
+	try {
+		console.log('[INFO] Refreshing command list.');
+
+		await rest.put(
+			Routes.applicationGuildCommands(clientId, guildId),
+			{ body: commands },
+		);
+
+		console.log('[INFO] Reloaded commands.');
+	}
+	catch (error) {
+		console.error(error);
+	}
+});
