@@ -46,17 +46,26 @@ if %errorlevel% equ 0 (
 )
 
 REM Checks if Chocolatey is installed, and if not, downloads and installs it.
-REM Using a more reliable method to check for Chocolatey installation.
-where choco > nul 2>&1
-if %errorlevel% equ 0 (
-    echo Chocolatey is already installed.
-) else (
-    echo Chocolatey is being installed, please wait...
+if not exist "%ChocolateyInstall%" (
+    echo Chocolatey is not installed. Proceeding with installation, please wait...
     @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-    IF NOT !errorlevel! NEQ 0 (
+    IF NOTerrorlevel NEQ 0 (
         echo An error occurred while installing Chocolatey.
         pause
         exit
+    )
+) else (
+    dir "%ChocolateyInstall%" /a-d /b >nul 2>nul
+    if %errorlevel% equ 0 (
+        echo Chocolatey is already installed.
+    ) else (
+        echo Chocolatey installation directory is empty. Proceeding with installation, please wait...
+        @"%SystemRoot%\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "[System.Net.ServicePointManager]::SecurityProtocol = 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+        IF NOTerrorlevel NEQ 0 (
+            echo An error occurred while installing Chocolatey.
+            pause
+            exit
+        )
     )
 )
 
