@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, userMention } = require('discord.js');
 
 module.exports = {
 
@@ -13,7 +13,7 @@ module.exports = {
 	async execute(interaction) {
 		const userToIntroduce = interaction.options.getUser('user');
 		await interaction.reply({
-			content: 'Welcome ' + userToIntroduce.username + '! Let\'s provide you with a few resources to make sure you have everything you to get you on your way.',
+			content: `Welcome ${userMention(userToIntroduce.id)}! Let's provide you with a few resources to make sure you have everything you need to get you on your way.`,
 			embeds: [{
 				title: 'First check out our DtgA Website\'s Getting Started page to make sure you have everything you need',
 				url: 'https://clonephaze.github.io/DtgA/GettingStarted/GettingsStarted.html',
