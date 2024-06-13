@@ -45,6 +45,17 @@ module.exports = {
 				])
 				.setThumbnail('https://media.discordapp.net/attachments/978056569994502184/1227730375850328094/Logo_Overlay.png?ex=666a1183&is=6668c003&hm=6b985a580402d8b9156b43502bd1ac6f1ccf8f4352bd35d358f70656464f0061&=&format=webp&quality=lossless&width=657&height=621');
 			break;
+		case 'collision actors':
+			response = new EmbedBuilder()
+				.setColor([174, 235, 220])
+				.setTitle('Instructions for installing Collision Actors')
+				.setFields([
+					{ name: 'Step 1', value: '[Download the Collision Actors mod from Gamebanana.](https://gamebanana.com/mods/307642)' },
+					{ name: 'Step 2', value: 'Open BCML and install the Collision Actors mod, and since Collision Actors should be installed as a higher priority than DtgA no priority sorting should be required.' },
+					{ name: 'Step 3', value: 'That should be it! If you continue to have issues please let us know!' },
+				])
+				.setThumbnail('https://media.discordapp.net/attachments/978056569994502184/1227730375850328094/Logo_Overlay.png?ex=666a1183&is=6668c003&hm=6b985a580402d8b9156b43502bd1ac6f1ccf8f4352bd35d358f70656464f0061&=&format=webp&quality=lossless&width=657&height=621');
+			break;
 		// Add more cases as needed
 		default:
 			response = `Sorry, no instructions found for the set: ${instructionSetName}`;
@@ -59,11 +70,8 @@ module.exports = {
 				await interaction.reply({ embeds: [response] });
 			}
 		}
-		// else if (user) {
-		// 	await interaction.reply({ content: `${userMention(user.id)} ${response}` });
-		// }
-		// else {
-		// 	await interaction.reply(response);
-		// }
+		else {
+			await interaction.reply({ content: response, ephemeral: true });
+		}
 	},
 };
