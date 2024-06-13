@@ -7,7 +7,8 @@ const { token, clientId, guildId } = require('./config.json');
 // Create a new Discord client with the Guilds intent
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages] });
 
-// Create a collection to store commands
+// Create a collection to store commands and cooldowns
+client.cooldowns = new Collection();
 client.commands = new Collection();
 const commands = [];
 
