@@ -61,6 +61,7 @@ module.exports = {
 			break;
 		case 'input list':
 		case 'combo list':
+		case 'inputs':
 			response = new EmbedBuilder()
 				.setColor([174, 235, 220])
 				.setTitle('Input List for DtgA')
