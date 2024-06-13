@@ -34,6 +34,7 @@ module.exports = {
 				.setThumbnail('https://media.discordapp.net/attachments/978056569994502184/1227730375850328094/Logo_Overlay.png?ex=666a1183&is=6668c003&hm=6b985a580402d8b9156b43502bd1ac6f1ccf8f4352bd35d358f70656464f0061&=&format=webp&quality=lossless&width=657&height=621');
 			break;
 		case 'bcml bug':
+		case 'bcmlbug':
 			response = new EmbedBuilder()
 				.setColor([174, 235, 220])
 				.setTitle('Instructions for fixing the BCML bug')
@@ -46,6 +47,8 @@ module.exports = {
 				.setThumbnail('https://media.discordapp.net/attachments/978056569994502184/1227730375850328094/Logo_Overlay.png?ex=666a1183&is=6668c003&hm=6b985a580402d8b9156b43502bd1ac6f1ccf8f4352bd35d358f70656464f0061&=&format=webp&quality=lossless&width=657&height=621');
 			break;
 		case 'collision actors':
+		case 'collision actor':
+		case 'collact':
 			response = new EmbedBuilder()
 				.setColor([174, 235, 220])
 				.setTitle('Instructions for installing Collision Actors')
@@ -53,6 +56,30 @@ module.exports = {
 					{ name: 'Step 1', value: '[Download the Collision Actors mod from Gamebanana.](https://gamebanana.com/mods/307642)' },
 					{ name: 'Step 2', value: 'Open BCML and install the Collision Actors mod, and since Collision Actors should be installed as a higher priority than DtgA no priority sorting should be required.' },
 					{ name: 'Step 3', value: 'That should be it! If you continue to have issues please let us know!' },
+				])
+				.setThumbnail('https://media.discordapp.net/attachments/978056569994502184/1227730375850328094/Logo_Overlay.png?ex=666a1183&is=6668c003&hm=6b985a580402d8b9156b43502bd1ac6f1ccf8f4352bd35d358f70656464f0061&=&format=webp&quality=lossless&width=657&height=621');
+			break;
+		case 'input list':
+		case 'combo list':
+			response = new EmbedBuilder()
+				.setColor([174, 235, 220])
+				.setTitle('Input List for DtgA')
+				.setFields([
+					{ name: 'Coiled Sword', value: 'Crouch (L-Stick) + Attack (X)', inline: true },
+					{ name: 'Magic Pouch', value: 'Crouch (L-Stick) + Activate (A)', inline: true },
+					{ name: 'Spell Book', value: 'Dpad Down + Sprint (B)', inline: true },
+					{ name: 'Twilight Mirror', value: 'Crouch (L-Stick) + Jump (Y)', inline: true },
+					{ name: 'Mipha Jump (only in water)', value: 'Crouch (L-Stick) + Scope (R-Stick)', inline: true },
+					{ name: 'Double Jump', value: 'Jump (Y) + Activate (A)', inline: true },
+					{ name: 'Unlocked Dodge', value: 'Activate (A) + Sprint (B)', inline: true },
+					{ name: 'Air dash', value: 'Jump (Y) + Attack (X)', inline: true },
+					{ name: 'Estus Flask', value: 'Dpad Down + Activate (A)', inline: true },
+					{ name: 'Paraglider', value: 'Dpad Down + Jump (Y)', inline: true },
+					{ name: 'Flurry Rush', value: 'Dpad Down + Attack (X)', inline: true },
+					{ name: 'Double Dodge', value: 'Dpad Down + Lock-on (ZL)', inline: true },
+					{ name: 'Sink (Iron Boots Equipped, must be standing in water, NOT SWIMMING)', value: 'Activate (A) + LS Move', inline: true },
+					{ name: 'Dive (Dive Boots Equipped, must be standing in water, NOT SWIMMING)', value: 'DPad Down + LS Move', inline: true },
+					{ name: 'Remove Boots (must be swimming)', value: 'Crouch (L-Stick) + LS Move', inline: true },
 				])
 				.setThumbnail('https://media.discordapp.net/attachments/978056569994502184/1227730375850328094/Logo_Overlay.png?ex=666a1183&is=6668c003&hm=6b985a580402d8b9156b43502bd1ac6f1ccf8f4352bd35d358f70656464f0061&=&format=webp&quality=lossless&width=657&height=621');
 			break;
