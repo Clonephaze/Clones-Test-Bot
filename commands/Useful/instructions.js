@@ -7,11 +7,20 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('instruction-set-name')
 				.setDescription('Type the name of the instructions you want to send')
-				.setRequired(true))
+				.setRequired(true)
+				// .setAutocomplete(true))
+				.addChoices(
+					{ name: 'BCML Bug Old', value: 'bcml bug old' },
+					{ name: 'BCML Bug', value: 'bcml bug' },
+					{ name: 'Input List', value: 'input list' },
+					{ name: 'Collision Actors', value: 'collision actors' },
+				),
+		)
 		.addUserOption(option =>
 			option.setName('user')
 				.setDescription('The user to mention if needed')
-				.setRequired(false)),
+				.setRequired(false),
+		),
 	async execute(interaction) {
 		const instructionSetName = interaction.options.getString('instruction-set-name').toLowerCase();
 		const user = interaction.options.getUser('user');
@@ -102,4 +111,12 @@ module.exports = {
 			await interaction.reply({ content: response, ephemeral: true });
 		}
 	},
+	// autocomplete: async (interaction) => {
+	// 	const focusedValue = interaction.options.getFocused();
+	// 	const choices = ['bcml bug old', 'bcml bug', 'collision actors', 'input list'];
+	// 	const filtered = choices.filter(choice => choice.startsWith(focusedValue));
+	// 	await interaction.respond(
+	// 		filtered.map(choice => ({ name: choice, value: choice })),
+	// 	);
+	// },
 };

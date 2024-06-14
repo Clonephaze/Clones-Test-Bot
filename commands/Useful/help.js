@@ -7,7 +7,14 @@ module.exports = {
 		.addStringOption(option =>
 			option.setName('command_name')
 				.setDescription('The name of the command you want help with.')
-				.setRequired(false)),
+				.setRequired(false)
+				// .setAutocomplete(true) taken out because I learned about .addChoices lol.
+				.addChoices(
+					{ name: 'introduction', value: 'introduction' },
+					{ name: 'instructions', value: 'instructions' },
+					{ name: 'help', value: 'help' },
+				),
+		),
 	async execute(interaction) {
 		const commandName = interaction.options.getString('command_name');
 		let replyContent;
@@ -77,4 +84,12 @@ module.exports = {
 
 		await interaction.reply({ embeds: [replyContent], ephemeral: true });
 	},
+	// autocomplete: async (interaction) => {
+	// 	const focusedValue = interaction.options.getFocused();
+	// 	const choices = ['introduction', 'instructions', 'help'];
+	// 	const filtered = choices.filter(choice => choice.startsWith(focusedValue));
+	// 	await interaction.respond(
+	// 		filtered.map(choice => ({ name: choice, value: choice })),
+	// 	);
+	// },
 };
