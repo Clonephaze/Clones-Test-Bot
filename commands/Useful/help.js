@@ -13,6 +13,7 @@ module.exports = {
 					{ name: 'introduction', value: 'introduction' },
 					{ name: 'instructions', value: 'instructions' },
 					{ name: 'help', value: 'help' },
+					{ name: 'userdata', value: 'userdata' },
 				),
 		),
 	async execute(interaction) {
@@ -31,7 +32,12 @@ module.exports = {
 					},
 					{
 						name: '**/instructions** <instruction-set-name> *<user>*',
-						value: 'This command can provide various custom lists of instructions to new users and has 2 arguments to work with!',
+						value: 'This command can provide various custom lists of instructions to new users and has 2 arguments to work with.',
+						inline: false,
+					},
+					{
+						name: '**/userdata** <user> *<action>*',
+						value: 'View and manage user data. This command requires the `Administrator` permission. This command has 2 arguments to work with.',
 						inline: false,
 					},
 					{
@@ -71,6 +77,19 @@ module.exports = {
 				replyContent = new EmbedBuilder()
 					.setTitle('The /Help command')
 					.setDescription('This will be a list of all my commands and how to use them. You can also use `/help <command-name>` to get more detailed help with a specific command!')
+					.setColor([174, 235, 220]);
+				break;
+			case commandName === 'userdata':
+			case commandName === '/userdata':
+				replyContent = new EmbedBuilder()
+					.setTitle('The /UserData command')
+					.setDescription('This command will provide users with their current data. The <user> argument tells the command which user\'s data to focus on. The data will include warnings and xp, though xp is completely unimplemented at the moment.')
+					.addFields(
+						{ name: '**view**', value: 'View the data of the given user.' },
+						{ name: '**reset-warnings**', value: 'Reset the warnings of the given user.' },
+						{ name: '**add-warning**', value: 'Add a warning to the given user.' },
+						{ name: '**remove-warning**', value: 'Remove a warning from the given user.' },
+					)
 					.setColor([174, 235, 220]);
 				break;
 			// Add more cases for other commands
