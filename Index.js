@@ -130,8 +130,8 @@ client.on('messageCreate', async message => {
 		else if (user.warnings === 2) {
 			try {
 				// Timeout the user for 15 minutes
-				// const timeoutTime = 15 * 60 * 1000;
-				// await message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages');
+				const timeoutTime = 15 * 60 * 1000;
+				await message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages');
 				await message.author.send('Your message was automatically deleted and you have been put in timeout for 15 minutes. You now have 2 warnings.');
 			}
 			catch (error) {
@@ -141,8 +141,8 @@ client.on('messageCreate', async message => {
 		else if (user.warnings === 3) {
 			try {
 				// Timeout the user for 1 day
-				// const timeoutTime = 24 * 60 * 60 * 1000;
-				// await message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages');
+				const timeoutTime = 24 * 60 * 60 * 1000;
+				await message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages');
 				await message.author.send('Your message was automatically deleted and you have been put in timeout for 1 day. You now have 3 warnings.');
 			}
 			catch (error) {
@@ -152,7 +152,7 @@ client.on('messageCreate', async message => {
 		else if (user.warnings >= 4) {
 			try {
 				// Permanently ban the user
-				// await message.guild.members.ban(userId, { reason: 'Spamming messages' });
+				await message.guild.members.ban(userId, { reason: 'Spamming messages' });
 				await message.author.send('Your message was automatically deleted and you have been permanently banned for repeated spamming.');
 			}
 			catch (error) {
@@ -200,7 +200,7 @@ client.on('messageCreate', message => {
 		// message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages').catch(console.error);
 
 		// This sends a warning message to the user
-		message.author.send('You would have just been kicked for spamming. Please refrain from sending too many messages in a short period.');
+		message.author.send('Please refrain from sending too many messages in a short period. (5 messages in 10 seconds) Your messages were automatically deleted.');
 
 		// Optionally, send a message to the channel or log the action
 		// message.channel.send(`User ${message.author.tag} has been warned for spamming.`);
