@@ -60,33 +60,33 @@ except IOError as e:
     sys.exit(1)
 
 # Set the console window title
-ctypes.windll.kernel32.SetConsoleTitleW("Creating .env, awaiting user input...")
+# ctypes.windll.kernel32.SetConsoleTitleW("Creating .env, awaiting user input...")
 
-# Edit template.env
-template_env_filename = 'template.env'
-env_filename = '.env'
+# # Edit template.env
+# template_env_filename = 'template.env'
+# env_filename = '.env'
 
-try:
-    with open(template_env_filename, 'r') as template_env_file:
-        template_env_data = template_env_file.read()
+# try:
+#     with open(template_env_filename, 'r') as template_env_file:
+#         template_env_data = template_env_file.read()
 
-    with open(env_filename, 'w') as env_file:
-        env_file.write(template_env_data)
-except FileNotFoundError:
-    print(f"File not found: {template_env_filename}. Terminating...")
-    time.sleep(5) 
-    sys.exit(1)
-except IOError as e:
-    print(f"Error while reading or writing files: {e}. Terminating...")
-    time.sleep(5) 
-    sys.exit(1)
+#     with open(env_filename, 'w') as env_file:
+#         env_file.write(template_env_data)
+# except FileNotFoundError:
+#     print(f"File not found: {template_env_filename}. Terminating...")
+#     time.sleep(5) 
+#     sys.exit(1)
+# except IOError as e:
+#     print(f"Error while reading or writing files: {e}. Terminating...")
+#     time.sleep(5) 
+#     sys.exit(1)
 
-# Delete template files
-try:
-    os.remove(template_config_filename)
-    os.remove(template_env_filename)
-except FileNotFoundError:
-    pass  # The files may have been deleted already
+# # Delete template files
+# try:
+#     os.remove(template_config_filename)
+#     os.remove(template_env_filename)
+# except FileNotFoundError:
+#     pass  # The files may have been deleted already
 
 os.chdir("..")
 
