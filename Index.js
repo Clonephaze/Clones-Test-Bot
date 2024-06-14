@@ -1,7 +1,7 @@
 // Import required modules and packages
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits, EmbedBuilder, REST, Routes } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, REST, Routes } = require('discord.js');
 const { token, clientId, guildId } = require('./config.json');
 const sequelize = require('./sequelize');
 const User = require('./models/User');
