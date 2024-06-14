@@ -3,6 +3,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { Client, Collection, GatewayIntentBits, EmbedBuilder, REST, Routes } = require('discord.js');
 const { token, clientId, guildId } = require('./config.json');
+const sequelize = require('./sequelize');
+const User = require('./models/User');
 
 // Create a new Discord client with the Guilds intent
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent, GatewayIntentBits.DirectMessages] });
@@ -63,7 +65,8 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
-
+// === section currently disabled until we decide it should be automated ===
+//
 // // Start listening for keywords and reply if BCML Bug is detected
 // const keywordsBCMLbug = ['loading forever', 'keeps loading', 'wont load', 'won\'t load', 'stuck on loading', 'stuck on load', 'load forever', 'loading screen', 'black screen', 'infinite loading'];
 // client.on('messageCreate', message => {
@@ -79,7 +82,6 @@ for (const file of eventFiles) {
 // 		});
 // 	}
 // });
-
 // // Start listening for keywords and reply if the inventory bug is detected
 // const keywordsInvBug = ['everything in my inventory', 'set to zero', 'set to 0', 'lost inventory', 'all my items'];
 // client.on('messageCreate', message => {
@@ -96,24 +98,70 @@ for (const file of eventFiles) {
 // 	}
 // });
 
-const keywordsSpamBlock = ['you could win', 'chance to win', 'sign up now', 'you have been randomly selected', 'we are a fast growing', 'crypto giveaway'];
 client.on('messageCreate', async message => {
-	if (!message.author.bot && keywordsSpamBlock.some(keyword => message.content.toLowerCase().includes(keyword))) {
-		// Remove the user's message
+	if (message.author.bot) return;
+
+	const userId = message.author.id;
+	const keywordsSpamBlock = ['you could win', 'chance to win', 'sign up now', 'you have been randomly selected', 'we are a fast growing', 'crypto giveaway'];
+
+	if (keywordsSpamBlock.some(keyword => message.content.toLowerCase().includes(keyword))) {
+		// Delete the user's message
 		await message.delete();
 
-		// Fetch the user to send them a DM
-		const user = await message.client.users.fetch(message.author.id);
-
-		try {
-			// Send a DM to the user explaining why their message was deleted
-			await user.send('Please do not spam. Your message was automatically deleted.');
+		// Fetch or create user data from the database
+		let user = await User.findOne({ where: { id: userId } });
+		if (!user) {
+			user = await User.create({ id: userId });
 		}
-		catch (error) {
-			console.error(`Failed to send DM to ${user.tag}:`, error);
+
+		user.warnings += 1;
+		await user.save();
+
+		// Define actions based on the number of warnings
+		if (user.warnings === 1) {
+			try {
+				// Send a DM to the user explaining the first warning
+				await message.author.send('Please do not spam. Your message was automatically deleted. You now have 1 warning.');
+			}
+			catch (error) {
+				console.error(`Failed to send DM to ${message.author.tag}:`, error);
+			}
+		}
+		else if (user.warnings === 2) {
+			try {
+				// Timeout the user for 15 minutes
+				// const timeoutTime = 15 * 60 * 1000;
+				// await message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages');
+				await message.author.send('Your message was automatically deleted and you have been put in timeout for 15 minutes. You now have 2 warnings.');
+			}
+			catch (error) {
+				console.error(`Failed to timeout ${message.author.tag}:`, error);
+			}
+		}
+		else if (user.warnings === 3) {
+			try {
+				// Timeout the user for 1 day
+				// const timeoutTime = 24 * 60 * 60 * 1000;
+				// await message.guild.members.cache.get(userId).timeout(timeoutTime, 'Spamming messages');
+				await message.author.send('Your message was automatically deleted and you have been put in timeout for 1 day. You now have 3 warnings.');
+			}
+			catch (error) {
+				console.error(`Failed to timeout ${message.author.tag}:`, error);
+			}
+		}
+		else if (user.warnings >= 4) {
+			try {
+				// Permanently ban the user
+				// await message.guild.members.ban(userId, { reason: 'Spamming messages' });
+				await message.author.send('Your message was automatically deleted and you have been permanently banned for repeated spamming.');
+			}
+			catch (error) {
+				console.error(`Failed to ban ${message.author.tag}:`, error);
+			}
 		}
 	}
 });
+
 
 // Number of messages
 const messageLimit = 5;
@@ -184,5 +232,14 @@ client.once('ready', async () => {
 	}
 	catch (error) {
 		console.error(error);
+	}
+
+	// Sync Sequelize models
+	try {
+		await sequelize.sync();
+		console.log('Database synced');
+	}
+	catch (error) {
+		console.error('Error syncing database:', error);
 	}
 });
